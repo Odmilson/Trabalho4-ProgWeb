@@ -3,8 +3,8 @@ from typing import List
 from pydantic import BaseModel
 
 class DrogaBase(BaseModel):
-    titulo: str
-    resumo: str
+    nome: str
+    descricao: str
 class DrogaCreate(DrogaBase):
     pass
 class Droga(DrogaBase):
@@ -28,8 +28,7 @@ class ItemVenda(ItemVendaBase):
         orm_mode = True
 
 class VendaBase(BaseModel):
-    id_cliente: int
-    id_funcionario: int
+    id_usuario: int
     data_venda: date
 class VendaCreate(VendaBase):
     pass
@@ -47,7 +46,6 @@ class PaginatedVenda(BaseModel):
 class UsuarioBase(BaseModel):
     nome: str
     email: str
-    cargo: str
 class UsuarioCreate(UsuarioBase):
     senha: str
 class Usuario(UsuarioBase):

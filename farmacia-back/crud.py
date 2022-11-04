@@ -85,8 +85,7 @@ def delete_droga_by_id(db: Session, droga_id: int):
 # empréstimo
 
 def create_venda(db: Session, venda: schemas.VendaCreate):
-    get_usuario_by_id(db, venda.id_cliente)
-    get_usuario_by_id(db, venda.id_funcionario)
+    get_usuario_by_id(db, venda.id_usuario)
     db_venda = models.Venda(**venda.dict())
     db.add(db_venda)
     db.commit()

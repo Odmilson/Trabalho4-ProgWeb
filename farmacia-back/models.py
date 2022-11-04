@@ -9,7 +9,6 @@ class Usuario(Base):
     nome = Column(String(150))
     email = Column(String(150), unique=True, index=True)
     senha = Column(String(255))
-    cargo = Column(String(11))
     vendas = relationship("Venda", back_populates="usuario")
 
 class Venda(Base):
@@ -17,10 +16,9 @@ class Venda(Base):
     
     id = Column(Integer, primary_key=True, index=True)
     data_venda = Column(Date)
-    id_cliente = Column(Integer, ForeignKey("usuarios.id"), nullable=False)
-    id_funcionario = Column(Integer, ForeignKey("usuarios.id"), nullable=False)
-    usuario = relationship("Usuario", back_populates="vendas")
-    itens_venda = relationship("ItemEmprestimo", back_populates="venda")
+    id_usuario = Column(Integer, ForeignKey("usuarios.id"), nullable=False)
+    usuario = relationship("Usuario", back_populates="vendas") 
+    itens_venda = relationship("ItemVenda", back_populates="venda")
 
 class Droga(Base):
     __tablename__ = 'drogas'
@@ -36,4 +34,4 @@ class ItemVenda(Base):
     id_droga = Column(Integer, ForeignKey('drogas.id'), primary_key=True, nullable=False)
     id_venda = Column(Integer, ForeignKey('vendas.id'), primary_key=True, nullable=False)
     droga = relationship("Droga", back_populates="itens_venda")
-    venda = relationship("Vendas", back_populates="itens_venda")
+    venda = relationship("Venda", back_populates="itens_venda")
